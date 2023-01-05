@@ -7068,6 +7068,7 @@ spawn(
                                 y.activeController.timeToNextAttack = -10
                                 y.activeController.hitboxMagnitude = 35
                                 y.activeController.active = false
+                                y.activeController.timeToNextBlock = 0
                                 y.activeController.focusStart = 0
                                 y.activeController.increment = 0
                                 y.activeController.blocking = false
