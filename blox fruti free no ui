@@ -7067,10 +7067,10 @@ spawn(
                             function()
                                 CameraShaker:Stop()
                                 y.activeController.timeToNextAttack = 15
-                                y.activeController.timeToNextAttack = 15
+                                y.activeController.timeToNextAttack = 5
                                 y.activeController.hitboxMagnitude = 10
                                 y.activeController.active = false
-                                y.activeController.timeToNextBlock = 0
+                                y.activeController.timeToNextBlock = 10
                                 y.activeController.focusStart = 0
                                 y.activeController.increment = 0
                                 y.activeController.blocking = false
