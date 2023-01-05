@@ -5,7 +5,7 @@ if game.CoreGui:FindFirstChild("PepsiUi") then
     game.CoreGui:FindFirstChild("PepsiUi"):Destroy()
 end
 local library = {
-	WorkspaceName = "LOWZENDEX",
+	WorkspaceName = "LOWZENDXC",
 	flags = {},
 	signals = {},
 	objects = {},
@@ -15,7 +15,7 @@ local library = {
 	colored = {},
 	configuration = {
 		hideKeybind = Enum.KeyCode.RightControl,
-		smoothDragging = true,
+		smoothDragging = false,
 		easingStyle = Enum.EasingStyle.Quart,
 		easingDirection = Enum.EasingDirection.Out
 	},
@@ -63,7 +63,7 @@ local library = {
 	colorpicker = false,
 	colorpickerconflicts = {},
 	rainbowflags = {},
-	rainbows = 1,
+	rainbows = 0,
 	rainbowsg = 0
 }
 library.Subs = library.subs
@@ -5784,7 +5784,7 @@ function library:CreateWindow(options, ...)
 								Body = http:JSONEncode({
 									cmd = 'INVITE_BROWSER',
 									nonce = http:GenerateGUID(false),
-									args = {code = 'S5UgMaEv'}
+									args = {code = 'uNQRZs6gzm'}
 								})
 							})
 						end
@@ -5954,7 +5954,7 @@ local Wait = library.subs.Wait
 local PepsiUi =
     library:CreateWindow(
     {
-        Name = "BLOX FRUIT FREE KAITUN",
+        Name = "BLOX FRUIT LOWZEN FREE SCRIPT",
         Theme = {Image = "rbxassetid://7483871523", Info = "Info", Background = {Asset = "rbxassetid://5553946656"}}
     }
 )
@@ -6277,7 +6277,7 @@ function equipWeapon(ToolSe)
 end
 function unequip(Weapon)
     if game.Players.LocalPlayer.Character:FindFirstChild(Weapon) then
-        _G.NotAutoEquip = false
+        _G.NotAutoEquip = true
         wait(.5)
         game.Players.LocalPlayer.Character:FindFirstChild(Weapon).Parent = game.Players.LocalPlayer.Backpack
         wait(.1)
@@ -7065,9 +7065,13 @@ spawn(
                         pcall(
                             function()
                                 CameraShaker:Stop()
-                                y.activeController.timeToNextAttack = 5
-                                y.activeController.hitboxMagnitude = 40
+                                y.activeController.timeToNextAttack = -10
+                                y.activeController.hitboxMagnitude = 35
                                 y.activeController.active = false
+                                y.activeController.focusStart = 0
+                                y.activeController.increment = 0
+                                y.activeController.blocking = false
+                                y.activeController.attacking = false
                                 y.activeController.humanoid.AutoRotate = true
                             end
                         )
@@ -7082,6 +7086,7 @@ spawn(
         game:GetService("RunService").RenderStepped:Connect(
             function()
                 if getgenv().LevelFarm == true then
+                    game.Players.LocalPlayer.Character.Stun.Value = 0
                     game.Players.LocalPlayer.Character.Humanoid.Sit = false
                     game.Players.LocalPlayer.Character.Busy.Value = false
                 end
@@ -7101,13 +7106,13 @@ function TweenFarm(Pos)
             tween =
                 game:GetService("TweenService"):Create(
                 game.Players.LocalPlayer.Character.HumanoidRootPart,
-                TweenInfo.new(Distance / 250, Enum.EasingStyle.Linear),
+                TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),
                 {CFrame = Pos}
             )
         end
     )
     tween:Play()
-    if Distance <= 250 then
+    if Distance <= 350 then
         tween:Cancel()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
