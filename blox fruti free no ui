@@ -6970,30 +6970,113 @@ task.spawn(
 )
 
 ------Fast
-_G.Fast_Attack = true
-
-local up=getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework));
-function round(number, decimals) local power=37 ^ decimals
-return math.floor(number * power) / power end;
-RigC=up[2] local mt=getrawmetatable(game)
-local old=mt.namecall setreadonly(mt, false)
-mt.namecall=newcclosure(function(...)
-local args={...} if tostring(getnamecallmethod())=="FireServer" then
-if tostring(args[1])=="RigControllerEvent" and type(args[4])=="number" then
-args[4]=#RigC.activeController.anims.basic
-end; return old(unpack(args)) end; return old(...) end);
-local c=require(game.ReplicatedStorage.Util.CameraShaker):Stop(); for i,v in pairs(getreg()) do
-if typeof(v)=="function" and getfenv(v).script==game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework then
-for x,b in pairs(debug.getupvalues(v)) do if typeof(b)=="table" then
-spawn(function() game:GetService("RunService").Heartbeat:Connect(function() if _G.Fast_Attack then pcall(function()
-b.activeController.timeToNextBlock=-999; b.activeController.hitSound=0;
-if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then b.activeController.timeToNextAttack=3;
-elseif game.Players.LocalPlayer.Character:FindFirstChild("Electro") then b.activeController.timeToNextAttack=2;
-else b.activeController.timeToNextAttack=-999; end b.activeController.focusStart=0; b.activeController.blocking=false;
-b.activeController.hitboxMagnitude=200; b.activeController.attacking=false;
-if getgenv().increment~=nil then b.activeController.increment=tonumber(getgenv().increment) end;
-round(b,0); end) end end) end) end end end end;
-
+local plr = game.Players.LocalPlayer
+local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
+function GetCurrentBlade()
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then
+        return
+    end
+    while ret.Parent ~= game.Players.LocalPlayer.Character do
+        ret = ret.Parent
+    end
+    return ret
+end
+function AttackNoCD()
+    local AC = CbFw2.activeController
+    for i = 1, 1 do
+        local bladehit =
+            require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+            plr.Character,
+            {plr.Character.HumanoidRootPart},
+            60
+        )
+        local cac = {}
+        local hash = {}
+        for k, v in pairs(bladehit) do
+            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                table.insert(cac, v.Parent.HumanoidRootPart)
+                hash[v.Parent] = true
+            end
+        end
+        bladehit = cac
+        if #bladehit > 0 then
+            local u8 = debug.getupvalue(AC.attack, 5)
+            local u9 = debug.getupvalue(AC.attack, 6)
+            local u7 = debug.getupvalue(AC.attack, 4)
+            local u10 = debug.getupvalue(AC.attack, 7)
+            local u12 = (u8 * 798405 + u7 * 727595) % u9
+            local u13 = u7 * 798405
+            (function()
+                u12 = (u12 * u9 + u13) % 1099511627776
+                u8 = math.floor(u12 / u9)
+                u7 = u12 - u8 * u9
+            end)()
+            u10 = u10 + 1
+            debug.setupvalue(AC.attack, 5, u8)
+            debug.setupvalue(AC.attack, 6, u9)
+            debug.setupvalue(AC.attack, 4, u7)
+            debug.setupvalue(AC.attack, 7, u10)
+            pcall(
+                function()
+                    for k, v in pairs(AC.animator.anims.basic) do
+                        v:Play()
+                    end
+                end
+            )
+            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer(
+                    "weaponChange",
+                    tostring(GetCurrentBlade())
+                )
+                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+            end
+        end
+    end
+end
+require(game.ReplicatedStorage.Util.CameraShaker):Stop()
+task.spawn(
+    function()
+        while task.wait() do
+            pcall(
+                function()
+                    if getgenv().LevelFarm then
+                        if getgenv().LevelFarm then
+                            AttackNoCD()
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(
+    function()
+        game:GetService("RunService").RenderStepped:Connect(
+            function()
+                if getgenv().LevelFarm then
+                    if typeof(y) == "table" then
+                        pcall(
+                            function()
+                                CameraShaker:Stop()
+                                y.activeController.timeToNextAttack = 5
+                                y.activeController.hitboxMagnitude = 40
+                                y.activeController.active = false
+                                y.activeController.humanoid.AutoRotate = true
+                            end
+                        )
+                    end
+                end
+            end
+        )
+    end
+)
 spawn(
     function()
         game:GetService("RunService").RenderStepped:Connect(
