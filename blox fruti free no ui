@@ -5954,7 +5954,7 @@ local Wait = library.subs.Wait
 local PepsiUi =
     library:CreateWindow(
     {
-        Name = "FREE KAITUN",
+        Name = "BLOX FRUIT FREE KAITUN",
         Theme = {Image = "rbxassetid://7483871523", Info = "Info", Background = {Asset = "rbxassetid://5553946656"}}
     }
 )
@@ -5973,9 +5973,9 @@ local KaiTun6 = KaiTun:CreateSection({Name = "Sword", Side = "Right"})
 local KaiTun5 = KaiTun:CreateSection({Name = "Melee", Side = "Left"})
 QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Left"})
 Gun = KaiTun:CreateSection({Name = "Gun", Side = "Rght"})
-LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ✅"})
+LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ❌"})
 StastConFig = KaiTun2:AddLabel({Name = "UesConFig : ✅"})
-KaiTun2:AddLabel({Name = "Super Fast : ❌"})
+KaiTun2:AddLabel({Name = "Super Fast : ✅"})
 KaiTun2:AddLabel({Name = "Bypass : ✅"})
 WolrdSet3 = KaiTun2:AddLabel({Name = "Wolrd : 1 ❌"})
 WolrdSet = KaiTun2:AddLabel({Name = "Wolrd : 2 ❌"})
@@ -7066,7 +7066,7 @@ spawn(
                         pcall(
                             function()
                                 CameraShaker:Stop()
-                                y.activeController.timeToNextAttack = -1
+                                y.activeController.timeToNextAttack = 5
                                 y.activeController.timeToNextAttack = 0
                                 y.activeController.hitboxMagnitude = 100
                                 y.activeController.active = false
