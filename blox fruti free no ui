@@ -15,7 +15,7 @@ local library = {
 	colored = {},
 	configuration = {
 		hideKeybind = Enum.KeyCode.RightControl,
-		smoothDragging = false,
+		smoothDragging = true,
 		easingStyle = Enum.EasingStyle.Quart,
 		easingDirection = Enum.EasingDirection.Out
 	},
@@ -5784,7 +5784,7 @@ function library:CreateWindow(options, ...)
 								Body = http:JSONEncode({
 									cmd = 'INVITE_BROWSER',
 									nonce = http:GenerateGUID(false),
-									args = {code = 'uNQRZs6gzm'}
+									args = {code = 'S5UgMaEv'}
 								})
 							})
 						end
@@ -5954,7 +5954,7 @@ local Wait = library.subs.Wait
 local PepsiUi =
     library:CreateWindow(
     {
-        Name = "Alptra Hub",
+        Name = "FREE KAITUN",
         Theme = {Image = "rbxassetid://7483871523", Info = "Info", Background = {Asset = "rbxassetid://5553946656"}}
     }
 )
@@ -5973,9 +5973,9 @@ local KaiTun6 = KaiTun:CreateSection({Name = "Sword", Side = "Right"})
 local KaiTun5 = KaiTun:CreateSection({Name = "Melee", Side = "Left"})
 QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Left"})
 Gun = KaiTun:CreateSection({Name = "Gun", Side = "Rght"})
-LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ❌"})
+LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ✅"})
 StastConFig = KaiTun2:AddLabel({Name = "UesConFig : ✅"})
-KaiTun2:AddLabel({Name = "Super Fast : ✅"})
+KaiTun2:AddLabel({Name = "Super Fast : ❌"})
 KaiTun2:AddLabel({Name = "Bypass : ✅"})
 WolrdSet3 = KaiTun2:AddLabel({Name = "Wolrd : 1 ❌"})
 WolrdSet = KaiTun2:AddLabel({Name = "Wolrd : 2 ❌"})
