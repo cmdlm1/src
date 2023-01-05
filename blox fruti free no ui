@@ -7066,8 +7066,8 @@ spawn(
                         pcall(
                             function()
                                 CameraShaker:Stop()
-                                y.activeController.timeToNextAttack = 15
-                                y.activeController.timeToNextAttack = 5
+                                y.activeController.timeToNextAttack = 11
+                                y.activeController.timeToNextAttack = 1
                                 y.activeController.hitboxMagnitude = 10
                                 y.activeController.active = false
                                 y.activeController.timeToNextBlock = 10
@@ -7109,13 +7109,13 @@ function TweenFarm(Pos)
             tween =
                 game:GetService("TweenService"):Create(
                 game.Players.LocalPlayer.Character.HumanoidRootPart,
-                TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),
+                TweenInfo.new(Distance / 250, Enum.EasingStyle.Linear),
                 {CFrame = Pos}
             )
         end
     )
     tween:Play()
-    if Distance <= 350 then
+    if Distance <= 250 then
         tween:Cancel()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
