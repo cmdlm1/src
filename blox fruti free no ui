@@ -6987,12 +6987,12 @@ function GetCurrentBlade()
 end
 function AttackNoCD()
     local AC = CbFw2.activeController
-    for i = 3, 5 do
+    for i = 1, 1 do
         local bladehit =
             require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
             plr.Character,
             {plr.Character.HumanoidRootPart},
-            20
+            60
         )
         local cac = {}
         local hash = {}
@@ -7003,7 +7003,7 @@ function AttackNoCD()
             end
         end
         bladehit = cac
-        if #bladehit > 10 then
+        if #bladehit > 0 then
             local u8 = debug.getupvalue(AC.attack, 5)
             local u9 = debug.getupvalue(AC.attack, 6)
             local u7 = debug.getupvalue(AC.attack, 4)
@@ -7015,7 +7015,7 @@ function AttackNoCD()
                 u8 = math.floor(u12 / u9)
                 u7 = u12 - u8 * u9
             end)()
-            u10 = u10 + 10
+            u10 = u10 + 1
             debug.setupvalue(AC.attack, 5, u8)
             debug.setupvalue(AC.attack, 6, u9)
             debug.setupvalue(AC.attack, 4, u7)
@@ -7066,8 +7066,8 @@ spawn(
                         pcall(
                             function()
                                 CameraShaker:Stop()
-                                y.activeController.timeToNextAttack = 5
-                                y.activeController.timeToNextAttack = 10
+                                y.activeController.timeToNextAttack = -1
+                                y.activeController.timeToNextAttack = 0
                                 y.activeController.hitboxMagnitude = 100
                                 y.activeController.active = false
                                 y.activeController.timeToNextBlock = 0
