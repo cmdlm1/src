@@ -1,11 +1,9 @@
 
-
-
 if game.CoreGui:FindFirstChild("PepsiUi") then
     game.CoreGui:FindFirstChild("PepsiUi"):Destroy()
 end
 local library = {
-	WorkspaceName = "LOWZENDXC",
+	WorkspaceName = "Name",
 	flags = {},
 	signals = {},
 	objects = {},
@@ -5954,7 +5952,7 @@ local Wait = library.subs.Wait
 local PepsiUi =
     library:CreateWindow(
     {
-        Name = "BLOX FRUIT LOWZEN FREE SCRIPT",
+        Name = "BLOX FRUIT FREE KAITUN",
         Theme = {Image = "rbxassetid://7483871523", Info = "Info", Background = {Asset = "rbxassetid://5553946656"}}
     }
 )
@@ -5974,6 +5972,7 @@ local KaiTun5 = KaiTun:CreateSection({Name = "Melee", Side = "Left"})
 QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Left"})
 Gun = KaiTun:CreateSection({Name = "Gun", Side = "Rght"})
 LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ❌"})
+StastConFig = KaiTun2:AddLabel({Name = "UesConFig : ✅"})
 KaiTun2:AddLabel({Name = "Super Fast : ✅"})
 KaiTun2:AddLabel({Name = "Bypass : ✅"})
 WolrdSet3 = KaiTun2:AddLabel({Name = "Wolrd : 1 ❌"})
@@ -6986,7 +6985,7 @@ function GetCurrentBlade()
 end
 function AttackNoCD()
     local AC = CbFw2.activeController
-    for i = 1, 1 do
+    for i = 1, 4 do
         local bladehit =
             require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
             plr.Character,
@@ -7002,7 +7001,7 @@ function AttackNoCD()
             end
         end
         bladehit = cac
-        if #bladehit > 0 then
+        if #bladehit > 4 then
             local u8 = debug.getupvalue(AC.attack, 5)
             local u9 = debug.getupvalue(AC.attack, 6)
             local u7 = debug.getupvalue(AC.attack, 4)
@@ -7014,7 +7013,7 @@ function AttackNoCD()
                 u8 = math.floor(u12 / u9)
                 u7 = u12 - u8 * u9
             end)()
-            u10 = u10 + 1
+            u10 = u10 + 5
             debug.setupvalue(AC.attack, 5, u8)
             debug.setupvalue(AC.attack, 6, u9)
             debug.setupvalue(AC.attack, 4, u7)
@@ -7066,13 +7065,9 @@ spawn(
                             function()
                                 CameraShaker:Stop()
                                 y.activeController.timeToNextAttack = -10
+								y.activeController.timeToNextAttack = 0
                                 y.activeController.hitboxMagnitude = 35
                                 y.activeController.active = false
-                                y.activeController.timeToNextBlock = 0
-                                y.activeController.focusStart = 0
-                                y.activeController.increment = 0
-                                y.activeController.blocking = false
-                                y.activeController.attacking = false
                                 y.activeController.humanoid.AutoRotate = true
                             end
                         )
@@ -7087,7 +7082,6 @@ spawn(
         game:GetService("RunService").RenderStepped:Connect(
             function()
                 if getgenv().LevelFarm == true then
-                    game.Players.LocalPlayer.Character.Stun.Value = 0
                     game.Players.LocalPlayer.Character.Humanoid.Sit = false
                     game.Players.LocalPlayer.Character.Busy.Value = false
                 end
