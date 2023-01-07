@@ -1,11 +1,62 @@
+getgenv().Config = {
+    team = 'p',--p/m
+    _selectwaepon = "Melee",--"Melee"/"Sword"
+---    autofarmlevel = true,
 
+---    autonewworld = true,
+---    bartilo = true,
+---    donswan = true,
+
+---   fastattack = true,
+---  fastatkmode = "f",--n,f,very
+    buso = true,
+    ken = true,
+    autofastscreen = true ,
+    removeeffect = true,
+    BootsFps = true,
+    distance = 0,
+    hight = 30,
+
+	statkaitan = true,
+    sword = false,
+    gun = false,
+    fruit = false,
+
+    autolegendarysword = true,
+    autolegendarysword_hop = false,
+    autosaber = true,
+	autobuddy = true,
+	automidnight = true,
+    autorengoku = true,
+    swanglasses = true,
+	canvander = true,
+	twinhook = true,
+    racev2 = true,
+	autohaki = true,
+	buyallitem = true,
+	kabucha = true,
+	serpentbow = true,
+	polev1 = true,
+
+    randomfruit = true,
+    storefruit = true,
+    buyallability = true,
+    
+    webhook = '',
+    websendwhen = 2425,
+    sendwebhook = false,
+	hop = true,
+
+    --Combat
+    superhuman = true,
+}
 
 
 if game.CoreGui:FindFirstChild("PepsiUi") then
     game.CoreGui:FindFirstChild("PepsiUi"):Destroy()
 end
 local library = {
-	WorkspaceName = "Name",
+	WorkspaceName = "lowzenDEX",
 	flags = {},
 	signals = {},
 	objects = {},
@@ -5784,7 +5835,7 @@ function library:CreateWindow(options, ...)
 								Body = http:JSONEncode({
 									cmd = 'INVITE_BROWSER',
 									nonce = http:GenerateGUID(false),
-									args = {code = 'uNQRZs6gzm'}
+									args = {code = 'afDeJEyCht'}
 								})
 							})
 						end
@@ -5961,17 +6012,22 @@ local PepsiUi =
 local KaiTun = PepsiUi:CreateTab({Name = "Genaral"})
 local KaiTun2 = KaiTun:CreateSection({Name = "Main", Side = "Left"})
 KaiTun2:AddToggle(
-    {Name = "Start", Value = false, Callback = function(value)
+    {Name = "Auto farm", Value = false, Callback = function(value)
             getgenv().LevelFarm = value
             StopBodyClip(getgenv().LevelFarm)
         end}
 )
+KaiTun2:AddToggle(
+    {Name = "White Screen", Value = false, Callback = function(value)
+		    _G.ConfigToggle = value
+        end}
+)
 local KaiTun2 = KaiTun:CreateSection({Name = "Stars Farm", Side = "Left"})
 local KaiTun2 = KaiTun:CreateSection({Name = "Main", Side = "Left"})
-local KaiTun3 = KaiTun:CreateSection({Name = "Main", Side = "Right"})
+local KaiTun3 = KaiTun:CreateSection({Name = "Main", Side = "Left"})
 local KaiTun6 = KaiTun:CreateSection({Name = "Sword", Side = "Right"})
-local KaiTun5 = KaiTun:CreateSection({Name = "Melee", Side = "Left"})
-QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Left"})
+local KaiTun5 = KaiTun:CreateSection({Name = "Melee", Side = "Right"})
+QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Right"})
 Gun = KaiTun:CreateSection({Name = "Gun", Side = "Rght"})
 LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ❌"})
 StastConFig = KaiTun2:AddLabel({Name = "UesConFig : ✅"})
@@ -6267,24 +6323,19 @@ function StopBodyClip(AE)
         _G.Clip = false
     end
 end
-function equipWeapon(ToolSe)
-    if not _G.NotAutoEquip then
-        if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
-            Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
-            wait(.1)
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+function equipWeapon(try)
+    for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if(v:IsA('Tool'))then
+            if(v.ToolTip==typ or v.Name==typ )then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+            end
         end
     end
 end
 function unequip(Weapon)
-    if game.Players.LocalPlayer.Character:FindFirstChild(Weapon) then
-        _G.NotAutoEquip = true
-        wait(.5)
-        game.Players.LocalPlayer.Character:FindFirstChild(Weapon).Parent = game.Players.LocalPlayer.Backpack
-        wait(.1)
-        _G.NotAutoEquip = false
+    game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
     end
-end
+
 function AutoHaki()
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
@@ -6970,6 +7021,35 @@ task.spawn(
     end
 )
 
+spawn(function()---buy ability
+    while task.wait() do
+        pcall(function()
+            if getgenv().Config.buyallability then
+                local args = {
+                    [1] = "BuyHaki",
+                    [2] = "Geppo"
+                }
+                enc1 = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                wait(1)
+                local args = {
+                    [1] = "BuyHaki",
+                    [2] = "Buso"
+                }
+                enc2 = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                wait(1)
+                local args = {
+                    [1] = "BuyHaki",
+                    [2] = "Soru"
+                }
+                end3 = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end)
+        if tostring(enc1) == 2 and tostring(enc2) == 2 and tostring(enc3) == 2 then
+            break
+        end
+    end
+end)
+
 ------Fast
 local plr = game.Players.LocalPlayer
 local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
@@ -6987,7 +7067,7 @@ function GetCurrentBlade()
 end
 function AttackNoCD()
     local AC = CbFw2.activeController
-    for i = 1, 4 do
+    for i = 1, 1 do
         local bladehit =
             require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
             plr.Character,
@@ -7002,8 +7082,8 @@ function AttackNoCD()
                 hash[v.Parent] = true
             end
         end
-        bladehit = cac
-        if #bladehit > 3 then
+		bladehit = cac
+        if #bladehit > 0 then
             local u8 = debug.getupvalue(AC.attack, 5)
             local u9 = debug.getupvalue(AC.attack, 6)
             local u7 = debug.getupvalue(AC.attack, 4)
@@ -7015,29 +7095,27 @@ function AttackNoCD()
                 u8 = math.floor(u12 / u9)
                 u7 = u12 - u8 * u9
             end)()
-            u10 = u10 + 5
+            u10 = u10 + 1
             debug.setupvalue(AC.attack, 5, u8)
             debug.setupvalue(AC.attack, 6, u9)
             debug.setupvalue(AC.attack, 4, u7)
             debug.setupvalue(AC.attack, 7, u10)
-            pcall(
-                function()
-                    for k, v in pairs(AC.animator.anims.basic) do
-                        v:Play()
-                    end
-                end
-            )
-            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer(
-                    "weaponChange",
-                    tostring(GetCurrentBlade())
-                )
-                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+            pcall(function()
+                for k, v in pairs(AC.animator.anims.basic) do
+                    v:Play()
+                end                  
+            end
+		)
+            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
+				task.wait(xds)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                rel.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
             end
         end
     end
 end
+
 require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 task.spawn(
     function()
@@ -7130,6 +7208,18 @@ function ByPass(Position)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
 end
+
+----------------anti afk
+local VirtualUser = game:GetService('VirtualUser')
+spawn(function()---------- anti afk
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+        pcall(function()
+            VirtualUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            task.wait(1)
+            VirtualUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        end)
+    end)
+end)
 
 ------------------AutoFaarm
 task.spawn(
@@ -7446,7 +7536,6 @@ function QuestCheck()
                 ByPass(CFrameQuest)
             end
 		elseif MyLevel == 90 or MyLevel <= 99 then
-			RedeemCode()
             Mon = "Snow Bandit [Lv. 90]"
             LevelQuest = 1
             NameQuest = "SnowQuest"
@@ -8154,6 +8243,16 @@ function QuestCheck()
 			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
                 ByPass(CFrameQuest)
             end
+		elseif MyLevel == 2400 or MyLevel <= 2425 then
+            Mon = "Candy Pirate [Lv. 2400]"
+            LevelQuest = 1
+            NameQuest = "CandyQuest1"
+            NameMon = "Snow Demon"
+            CFrameQuest = CFrame.new(-776.070862, 23.5809536, -14453.0078, 0.33384338, 0, -0.942628562, 0, 1, 0, 0.942628562, 0, 0.33384338)
+            CFrameMon = CFrame.new(-777.070862, 23.5809536, -14453.0078, 0.33384338, 0, -0.942628562, 0, 1, 0, 0.942628562, 0, 0.33384338)
+			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
+                ByPass(CFrameQuest)
+			end	
 		end
     end
 end
