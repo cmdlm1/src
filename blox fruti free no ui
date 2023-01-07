@@ -6350,6 +6350,75 @@ MELEE:AddToggle({
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
 		_G.AutoSuperhuman = value
+		task.spawn(function()
+			pcall(function()
+				while wait() do 
+					if _G.AutoSuperhuman then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 150000 then
+							wait(.1)
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+						end   
+						if game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") or game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
+							_G.WeaponMelee = "Superhuman"
+						end  
+						if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") or game.Players.LocalPlayer.Character:FindFirstChild("Electro") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") then
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
+								_G.WeaponMelee = "Black Leg"
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
+								_G.WeaponMelee = "Electro"
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
+								_G.WeaponMelee = "Fishman Karate"
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
+								_G.WeaponMelee = "Dragon Claw"
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
+								unequip("Black Leg")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+							end
+							if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
+								unequip("Black Leg")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 750000 then
+								unequip("Electro")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+							end
+							if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 750000 then
+								unequip("Electro")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 and game:GetService("Players")["Localplayer"].Data.Fragments.Value >= 1500 then
+								unequip("Fishman Karate")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2") 
+							end
+							if game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate").Level.Value >= 300 and game:GetService("Players")["Localplayer"].Data.Fragments.Value >= 1500 then
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2") 
+							end
+							if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 3000000 then
+								unequip("Dragon Claw")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+							end
+							if game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 3000000 then
+								unequip("Dragon Claw")
+								wait(.1)
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+							end 
+						end
+					end
+				end
+			end)
+		end)		
     end
 })
 MELEE:AddToggle({
@@ -6357,6 +6426,18 @@ MELEE:AddToggle({
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
 		_G.AutoGodHuman = value
+		if _G.AutoGodHuman and StartMagnetAutoGodHuman then
+			if v.Name == "Dragon Crew Warrior [Lv. 1575]" and (v.HumanoidRootPart.Position - MusketeerHatMon.Position).Magnitude <= 350 and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+				v.Humanoid:ChangeState(14)
+				v.HumanoidRootPart.CanCollide = false
+				v.Head.CanCollide = false
+				v.HumanoidRootPart.CFrame = PosMonBone
+				if v.Humanoid:FindFirstChild("Animator") then
+					v.Humanoid.Animator:Destroy()
+				end
+				sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+			end
+		end
     end
 })
 Mastery:AddToggle({
@@ -6364,6 +6445,42 @@ Mastery:AddToggle({
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
 		_G.AutoFarmGunMastery = value
+		if _G.AutoFarmGunMastery and StartMasteryGunMagnet then
+			if v.Name == "Monkey [Lv. 14]" then
+				if (v.HumanoidRootPart.Position - PosMonMasteryGun.Position).Magnitude <= 250 and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+					v.Humanoid:ChangeState(14)
+					v.HumanoidRootPart.CanCollide = false
+					v.Head.CanCollide = false
+					v.HumanoidRootPart.CFrame = PosMonMasteryGun
+					if v.Humanoid:FindFirstChild("Animator") then
+						v.Humanoid.Animator:Destroy()
+					end
+					sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+				end
+			elseif v.Name == "Factory Staff [Lv. 800]" then
+				if (v.HumanoidRootPart.Position - PosMonMasteryGun.Position).Magnitude <= 250 and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+					v.Humanoid:ChangeState(14)
+					v.HumanoidRootPart.CanCollide = false
+					v.Head.CanCollide = false
+					v.HumanoidRootPart.CFrame = PosMonMasteryGun
+					if v.Humanoid:FindFirstChild("Animator") then
+						v.Humanoid.Animator:Destroy()
+					end
+					sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+				end
+			elseif v.Name == Mon then
+				if (v.HumanoidRootPart.Position - PosMonMasteryGun.Position).Magnitude <= 250 and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+					v.Humanoid:ChangeState(14)
+					v.HumanoidRootPart.CanCollide = false
+					v.Head.CanCollide = false
+					v.HumanoidRootPart.CFrame = PosMonMasteryGun
+					if v.Humanoid:FindFirstChild("Animator") then
+						v.Humanoid.Animator:Destroy()
+					end
+					sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+				end
+			end
+		end
     end
 })
 Mastery:AddToggle({
