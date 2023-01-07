@@ -7144,9 +7144,9 @@ spawn(
                         pcall(
                             function()
                                 CameraShaker:Stop()
-                                y.activeController.timeToNextAttack = -10
+                                y.activeController.timeToNextAttack = 0
 								y.activeController.timeToNextAttack = 0
-                                y.activeController.hitboxMagnitude = 35
+                                y.activeController.hitboxMagnitude = 60
                                 y.activeController.active = false
                                 y.activeController.humanoid.AutoRotate = true
                             end
