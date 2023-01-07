@@ -6031,7 +6031,7 @@ QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Right"})
 Gun = KaiTun:CreateSection({Name = "Gun", Side = "Rght"})
 LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ❌"})
 StastConFig = KaiTun2:AddLabel({Name = "UesConFig : ✅"})
-KaiTun2:AddLabel({Name = "Super Fast : ✅"})
+KaiTun2:AddLabel({Name = "Fast ATYACK : ✅"})
 KaiTun2:AddLabel({Name = "Bypass : ✅"})
 WolrdSet3 = KaiTun2:AddLabel({Name = "Wolrd : 1 ❌"})
 WolrdSet = KaiTun2:AddLabel({Name = "Wolrd : 2 ❌"})
@@ -7050,6 +7050,51 @@ spawn(function()---buy ability
     end
 end)
 
+-------ues and fast
+local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+local CombatFrameworkR = getupvalues(CombatFramework)[2]
+local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
+local RigControllerR = getupvalues(RigController)[2]
+local realbhit = require(game.ReplicatedStorage.CombatFramework.RigLib)
+local cooldownfastattack = tick()
+
+function CurrentWeapon()
+	local ac = CombatFrameworkR.activeController
+	local ret = ac.blades[1]
+	if not ret then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
+	pcall(function()
+		while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+	end)
+	if not ret then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
+	return ret
+end
+
+function getAllBladeHitsPlayers(Sizes)
+	local Hits = {}
+	local Client = game.Players.LocalPlayer
+	local Characters = game:GetService("Workspace").Characters:GetChildren()
+	for i=1,#Characters do local v = Characters[i]
+		local Human = v:FindFirstChildOfClass("Humanoid")
+		if v.Name ~= game.Players.LocalPlayer.Name and Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+5 then
+			table.insert(Hits,Human.RootPart)
+		end
+	end
+	return Hits
+end
+
+function getAllBladeHits(Sizes)
+	local Hits = {}
+	local Client = game.Players.LocalPlayer
+	local Enemies = game:GetService("Workspace").Enemies:GetChildren()
+	for i=1,#Enemies do local v = Enemies[i]
+		local Human = v:FindFirstChildOfClass("Humanoid")
+		if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+5 then
+			table.insert(Hits,Human.RootPart)
+		end
+	end
+	return Hits
+end
+
 ------Fast
 local plr = game.Players.LocalPlayer
 local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
@@ -7068,7 +7113,7 @@ end
 function AttackNoCD()
     local AC = CbFw2.activeController
     for i = 1, 1 do
-        local bladehit =
+        local bladehit = getAllBladeHits(30)
             require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
             plr.Character,
             {plr.Character.HumanoidRootPart},
@@ -7082,24 +7127,14 @@ function AttackNoCD()
                 hash[v.Parent] = true
             end
         end
-		bladehit = cac
-        if #bladehit > 0 then
-            local u8 = debug.getupvalue(AC.attack, 5)
-            local u9 = debug.getupvalue(AC.attack, 6)
-            local u7 = debug.getupvalue(AC.attack, 4)
-            local u10 = debug.getupvalue(AC.attack, 7)
-            local u12 = (u8 * 798405 + u7 * 727595) % u9
-            local u13 = u7 * 798405
-            (function()
-                u12 = (u12 * u9 + u13) % 1099511627776
-                u8 = math.floor(u12 / u9)
-                u7 = u12 - u8 * u9
-            end)()
-            u10 = u10 + 1
-            debug.setupvalue(AC.attack, 5, u8)
-            debug.setupvalue(AC.attack, 6, u9)
-            debug.setupvalue(AC.attack, 4, u7)
-            debug.setupvalue(AC.attack, 7, u10)
+		local bladehit = getAllBladeHits(30)
+		if #bladehit > 0 then
+			local AcAttack8 = debug.getupvalue(ac.attack, 5)
+			local AcAttack9 = debug.getupvalue(ac.attack, 6)
+			local AcAttack7 = debug.getupvalue(ac.attack, 4)
+			local AcAttack10 = debug.getupvalue(ac.attack, 7)
+			local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
+			local NumberAc13 = AcAttack7 * 798405
             pcall(function()
                 for k, v in pairs(AC.animator.anims.basic) do
                     v:Play()
@@ -7144,9 +7179,9 @@ spawn(
                         pcall(
                             function()
                                 CameraShaker:Stop()
-                                y.activeController.timeToNextAttack = 0
-								y.activeController.timeToNextAttack = 0
-                                y.activeController.hitboxMagnitude = 60
+                                y.activeController.timeToNextAttack = 1
+								y.activeController.timeToNextAttack = 1
+                                y.activeController.hitboxMagnitude = 35
                                 y.activeController.active = false
                                 y.activeController.humanoid.AutoRotate = true
                             end
