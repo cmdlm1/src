@@ -8505,7 +8505,7 @@ spawn(
                                 CameraShaker:Stop()
                                 y.activeController.timeToNextAttack = 1
 								y.activeController.timeToNextAttack = 1
-                                y.activeController.hitboxMagnitude = 35
+                                y.activeController.hitboxMagnitude = 50
                                 y.activeController.active = false
                                 y.activeController.humanoid.AutoRotate = true
                             end
@@ -8633,7 +8633,6 @@ task.spawn(
                                              then
                                                 repeat
                                                     task.wait()
-                                                    _G.NotAutoEquip = false
                                                     equipWeapon(_G.WeaponMelee)
                                                     AutoHaki()
                                                     PosMon = v.HumanoidRootPart.CFrame
@@ -8652,6 +8651,7 @@ task.spawn(
                                                 until not getgenv().LevelFarm or v.Humanoid.Health <= 0 or not v.Parent or
                                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible ==
                                                         false
+														equipWeapon(_G.WeaponMelee)
                                             else
                                                 StartMagnet = false
                                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
