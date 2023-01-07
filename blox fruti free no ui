@@ -43,7 +43,7 @@ getgenv().Config = {
     buyallability = true,
     
     webhook = '',
-    websendwhen = 2425,
+    websendwhen = 2450,
     sendwebhook = false,
 	hop = true,
 
@@ -6090,6 +6090,14 @@ local DUNGEON = shop:CreateSection({
     Name = "DUNGEON", -- ชื่อ
     Side = "Right" -- ตำแหน่ง Left/Right
 })
+local meleeshop = shop:CreateSection({
+    Name = "NPCSELLER", -- ชื่อ
+    Side = "Right" -- ตำแหน่ง Left/Right
+})
+local DUNGEONSHOP = shop:CreateSection({
+    Name = "DUNGEONSHOP", -- ชื่อ
+    Side = "Right" -- ตำแหน่ง Left/Right
+})
 NPCSELLER:AddButton({
     Name = "Cutlass",
     Callback = function()
@@ -6196,28 +6204,109 @@ DUNGEON:AddToggle({
     Name = "AUTO DUNGEON",
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
-        G.Auto_Dungeon = value
+        G.Auto_Dungeon = Value
     end
 })
 DUNGEON:AddToggle({
     Name = "AutoBuyChip",
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
-		_G.AutoBuyChip = value
+		_G.AutoBuyChip = Value
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LoadFruit", (FruitList))
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin", "Buy")
     end
 })
 DUNGEON:AddToggle({
-    Name = "Auto_StartRaid",
+    Name = "Auto Start Raid",
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
-		_G.Auto_StartRaid = value
+		_G.Auto_StartRaid = Value
     end
 })
 DUNGEON:AddToggle({
-    Name = "AutoBuyChip",
+    Name = "Auto Select Dungeon",
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
-		_G.AutoBuyChip = value
+		_G.AutoSelectDungeon = Value
+    end
+})
+
+DUNGEONSHOP:AddButton({
+    Name = "Flame",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Flame")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Ice",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Ice")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Quake",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Quake")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Light",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Light")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "String",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("String")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Rumble",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Rumble")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Dark",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Dark")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Buddha",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Human: Buddha")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Magma",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Magma")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Sand",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Sand")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Phoenix",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bird: Phoenix")
+    end
+})
+DUNGEONSHOP:AddButton({
+    Name = "Dough",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Dough")
+    end
+})
+meleeshop:AddButton({
+    Name = "Superhuman",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
     end
 })
 ------------------------melee
@@ -6338,7 +6427,7 @@ task.spawn(
             pcall(
                 function()
                     if getgenv().LevelFarm then
-                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value <= 2425 then
+                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value <= 2450 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "AddPoint",
                                 "Melee",
@@ -6357,7 +6446,7 @@ task.spawn(
             pcall(
                 function()
                     if getgenv().LevelFarm then
-                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2425 then
+                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2450 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "AddPoint",
                                 "Defense",
@@ -6377,8 +6466,8 @@ task.spawn(
                 function()
                     if getgenv().LevelFarm then
                         if
-                            game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2425 and
-                                game:GetService("Players").localPlayer.Data.Stats.Defense.Level.Value == 2425
+                            game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2450 and
+                                game:GetService("Players").localPlayer.Data.Stats.Defense.Level.Value == 2450
                          then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "AddPoint",
@@ -8425,7 +8514,7 @@ function QuestCheck()
 			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
                 ByPass(CFrameQuest)
             end
-		elseif MyLevel == 2375 or MyLevel <= 2425 then
+		elseif MyLevel == 2375 or MyLevel <= 2399 then
             Mon = "Candy Rebel [Lv. 2375]"
             LevelQuest = 2
             NameQuest = "ChocQuest2"
@@ -8435,9 +8524,19 @@ function QuestCheck()
 			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
                 ByPass(CFrameQuest)
             end
-		elseif MyLevel == 2425 or MyLevel <= 2425 then
-            Mon = "Candy Pirate [Lv. 2425]"
-            LevelQuest = 1
+		elseif MyLevel == 2400 or MyLevel <= 2424 then
+            Mon = "Candy Rebel [Lv. 2375]"
+            LevelQuest = 2
+            NameQuest = "ChocQuest2"
+            NameMon = "Candy Rebel"
+            CFrameQuest = CFrame.new(151.198242, 23.8907146, -12774.6172, 0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, 0.422592998)
+            CFrameMon = CFrame.new(420.127747, 109.63044, -12989.6035, 0.0957952142, 3.10210027e-08, 0.995401084, -9.46955225e-09, 1, -3.02529948e-08, -0.995401084, -6.52791066e-09, 0.0957952142)
+			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
+                ByPass(CFrameQuest)
+            end
+		elseif MyLevel == 2425 or MyLevel <= 2450 then
+            Mon = "Snow Demon [Lv. 2425]"
+            LevelQuest = 2
             NameQuest = "CandyQuest1"
             NameMon = "Snow Demon"
             CFrameQuest = CFrame.new(-776.070862, 23.5809536, -14453.0078, 0.33384338, 0, -0.942628562, 0, 1, 0, 0.942628562, 0, 0.33384338)
