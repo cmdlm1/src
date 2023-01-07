@@ -6201,7 +6201,7 @@ NPCSELLER:AddButton({
     end
 })
 NPCSELLER:AddButton({
-    Name = "buy alll",
+    Name = "buy all",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual Katana")
 				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
@@ -6341,11 +6341,36 @@ local MELEE = STATS:CreateSection({
     Name = "MELEE", -- ชื่อ
     Side = "Right" -- ตำแหน่ง Left/Right
 })
+local Mastery = STATS:CreateSection({
+    Name = "Mastery", -- ชื่อ
+    Side = "Left" -- ตำแหน่ง Left/Right
+})
 MELEE:AddToggle({
-    Name = "AUTO SUPER HUMAN",
+    Name = "Auto Super Human",
 	Value = false, -- ปรับค่าToggle true/false or Config
     Callback = function(value)
 		_G.AutoSuperhuman = value
+    end
+})
+MELEE:AddToggle({
+    Name = "Auto God Human",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoGodHuman = value
+    end
+})
+Mastery:AddToggle({
+    Name = "Auto Farm Gun Mastery",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoFarmGunMastery = value
+    end
+})
+Mastery:AddToggle({
+    Name = "Auto Farm Fruit Mastery",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoFarmFruitMastery = value
     end
 })
 local misc = PepsiUi:CreateTab({Name = "misc&autoitem"})
@@ -6356,6 +6381,133 @@ local misc1 = misc:CreateSection({
 local autoitem = misc:CreateSection({
     Name = "autoitem", -- ชื่อ
     Side = "Right" -- ตำแหน่ง Left/Right
+})
+---------auto
+autoitem:AddToggle({
+    Name = "AutoEctoplasm",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoEctoplasm = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoFarmSword",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoFarmSword  = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoRengoku",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoRengoku = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "EvoRace",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Auto_EvoRace = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoDoughtBossv2",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G._G.AutoDoughtBossv2 = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoDoughtBoss",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G._G.AutoDoughtBoss = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoCandy",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoCandy = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Mob aura",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.SelectQuest = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoFarmMoney",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoFarmMoney = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoFish",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoFish = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoMagma",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoMagma = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Scrap_Metal2",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Scrap_Metal2 = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Radioactive_Meterial",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Radioactive_Meterial = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Leather2",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Leather2 = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Vampire_Fang",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Vampire_Fang = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Gunpowder",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Gunpowder = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "AutoBartilo",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoBartilo = Value
+    end
+})
+autoitem:AddToggle({
+    Name = "Mystic",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Mystic = Value
+    end
 })
 misc1:AddButton({
     Name = "CAPCUT",
