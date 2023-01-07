@@ -6024,14 +6024,13 @@ KaiTun2:AddToggle(
 )
 local KaiTun2 = KaiTun:CreateSection({Name = "Stars Farm", Side = "Left"})
 local KaiTun2 = KaiTun:CreateSection({Name = "Main", Side = "Left"})
-local KaiTun3 = KaiTun:CreateSection({Name = "Main", Side = "Left"})
 local KaiTun6 = KaiTun:CreateSection({Name = "Sword", Side = "Right"})
 local KaiTun5 = KaiTun:CreateSection({Name = "Melee", Side = "Right"})
 QuestAR = KaiTun:CreateSection({Name = "Quest", Side = "Right"})
 Gun = KaiTun:CreateSection({Name = "Gun", Side = "Rght"})
 LevelFarmFarm = KaiTun2:AddLabel({Name = "AutoFarm : ❌"})
 StastConFig = KaiTun2:AddLabel({Name = "UesConFig : ✅"})
-KaiTun2:AddLabel({Name = "Fast ATYACK : ✅"})
+KaiTun2:AddLabel({Name = "Fast ATTACK : ✅"})
 KaiTun2:AddLabel({Name = "Bypass : ✅"})
 WolrdSet3 = KaiTun2:AddLabel({Name = "Wolrd : 1 ❌"})
 WolrdSet = KaiTun2:AddLabel({Name = "Wolrd : 2 ❌"})
@@ -6042,16 +6041,16 @@ StastSword = KaiTun2:AddLabel({Name = ""})
 StastGun = KaiTun2:AddLabel({Name = ""})
 StastDevilFruit = KaiTun2:AddLabel({Name = ""})
 PointsStast = KaiTun2:AddLabel({Name = ""})
-PlayerName = KaiTun3:AddLabel({Name = ""})
-Health = KaiTun3:AddLabel({Name = ""})
-Energy = KaiTun3:AddLabel({Name = ""})
-BountyHonorStast = KaiTun3:AddLabel({Name = ""})
-LevelStast = KaiTun3:AddLabel({Name = ""})
-EXP = KaiTun3:AddLabel({Name = ""})
-FragmentsStast = KaiTun3:AddLabel({Name = ""})
-BeliStast = KaiTun3:AddLabel({Name = ""})
-DevilFruitStast = KaiTun3:AddLabel({Name = ""})
-RaceStast = KaiTun3:AddLabel({Name = ""})
+PlayerName = KaiTun2:AddLabel({Name = ""})
+Health = KaiTun2:AddLabel({Name = ""})
+Energy = KaiTun2:AddLabel({Name = ""})
+BountyHonorStast = KaiTun2:AddLabel({Name = ""})
+LevelStast = KaiTun2:AddLabel({Name = ""})
+EXP = KaiTun2:AddLabel({Name = ""})
+FragmentsStast = KaiTun2:AddLabel({Name = ""})
+BeliStast = KaiTun2:AddLabel({Name = ""})
+DevilFruitStast = KaiTun2:AddLabel({Name = ""})
+RaceStast = KaiTun2:AddLabel({Name = ""})
 Superhuman = KaiTun5:AddLabel({Name = "❌ : Superhuman"})
 DeathStep = KaiTun5:AddLabel({Name = "❌ : Death Step"})
 SharkmanKarate = KaiTun5:AddLabel({Name = "❌ : Sharkman Karate"})
@@ -6081,6 +6080,163 @@ BartiloQuest = QuestAR:AddLabel({Name = "❌ : Bartilo Quest"})
 DonSwanQuest = QuestAR:AddLabel({Name = "❌ : Don Swan Quest"})
 KillDonSwan = QuestAR:AddLabel({Name = "❌ : Kill Don Swan"})
 
+--------------------pages shop
+local shop = PepsiUi:CreateTab({Name = "SHOP&DUNGEON"})
+local NPCSELLER = shop:CreateSection({
+    Name = "NPCSELLER", -- ชื่อ
+    Side = "Left" -- ตำแหน่ง Left/Right
+})
+local DUNGEON = shop:CreateSection({
+    Name = "DUNGEON", -- ชื่อ
+    Side = "Right" -- ตำแหน่ง Left/Right
+})
+NPCSELLER:AddButton({
+    Name = "Cutlass",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Refined Slingshot",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Slingshot")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Refined Flintlock",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Dual-Headed Blade",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Iron Mace",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Dual Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual Katana")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Black Cape",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Black Cape")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Bisento",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Tomoe Ring",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Tomoe Ring")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Triple Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Pipe",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Soul Cane",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Swordsman Hat",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Swordsman Hat")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Slingshot",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Musket",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
+    end
+})
+NPCSELLER:AddButton({
+    Name = "Flintlock",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
+    end
+})
+DUNGEON:AddToggle({
+    Name = "AUTO DUNGEON",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+        G.Auto_Dungeon = value
+    end
+})
+DUNGEON:AddToggle({
+    Name = "AutoBuyChip",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoBuyChip = value
+    end
+})
+DUNGEON:AddToggle({
+    Name = "Auto_StartRaid",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.Auto_StartRaid = value
+    end
+})
+DUNGEON:AddToggle({
+    Name = "AutoBuyChip",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoBuyChip = value
+    end
+})
+------------------------melee
+local STATS = PepsiUi:CreateTab({Name = "STATS&MELEE"})
+local STATS1 = STATS:CreateSection({
+    Name = "STATS", -- ชื่อ
+    Side = "Left" -- ตำแหน่ง Left/Right
+})
+local MELEE = STATS:CreateSection({
+    Name = "MELEE", -- ชื่อ
+    Side = "Right" -- ตำแหน่ง Left/Right
+})
+MELEE:AddToggle({
+    Name = "AUTO SUPER HUMAN",
+	Value = false, -- ปรับค่าToggle true/false or Config
+    Callback = function(value)
+		_G.AutoSuperhuman = value
+    end
+})
 ------------BodyClip and NoClip
 task.spawn(
     function()
@@ -6182,7 +6338,7 @@ task.spawn(
             pcall(
                 function()
                     if getgenv().LevelFarm then
-                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value <= 2400 then
+                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value <= 2425 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "AddPoint",
                                 "Melee",
@@ -6201,7 +6357,7 @@ task.spawn(
             pcall(
                 function()
                     if getgenv().LevelFarm then
-                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2400 then
+                        if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2425 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "AddPoint",
                                 "Defense",
@@ -6221,8 +6377,8 @@ task.spawn(
                 function()
                     if getgenv().LevelFarm then
                         if
-                            game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2400 and
-                                game:GetService("Players").localPlayer.Data.Stats.Defense.Level.Value == 2400
+                            game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value == 2425 and
+                                game:GetService("Players").localPlayer.Data.Stats.Defense.Level.Value == 2425
                          then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "AddPoint",
@@ -8269,7 +8425,7 @@ function QuestCheck()
 			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
                 ByPass(CFrameQuest)
             end
-		elseif MyLevel == 2375 or MyLevel <= 2400 then
+		elseif MyLevel == 2375 or MyLevel <= 2425 then
             Mon = "Candy Rebel [Lv. 2375]"
             LevelQuest = 2
             NameQuest = "ChocQuest2"
@@ -8279,8 +8435,8 @@ function QuestCheck()
 			if getgenv().LevelFarm and (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1200 then
                 ByPass(CFrameQuest)
             end
-		elseif MyLevel == 2400 or MyLevel <= 2425 then
-            Mon = "Candy Pirate [Lv. 2400]"
+		elseif MyLevel == 2425 or MyLevel <= 2425 then
+            Mon = "Candy Pirate [Lv. 2425]"
             LevelQuest = 1
             NameQuest = "CandyQuest1"
             NameMon = "Snow Demon"
