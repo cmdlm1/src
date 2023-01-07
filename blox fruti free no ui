@@ -71,8 +71,6 @@ else
   while wait() do
   if math.random(1,5) == 1 then
   jumpscare()
-  wait(10) do
-	game.Players.LocalPlayer:Kick("รันผิดเเมพรึป่าวไอ้โง่")
   end
   end
 end
