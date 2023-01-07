@@ -6323,7 +6323,7 @@ function StopBodyClip(AE)
         _G.Clip = false
     end
 end
-function equipWeapon(try)
+function equipWeapon(typ)
     for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if(v:IsA('Tool'))then
             if(v.ToolTip==typ or v.Name==typ )then
@@ -6332,7 +6332,7 @@ function equipWeapon(try)
         end
     end
 end
-function unequip(Weapon)
+function unequip()
     game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
     end
 
@@ -7237,6 +7237,7 @@ task.spawn(
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                             StartMagnet = false
                             QuestCheck()
+							equipWeapon(getgenv().Config._selectwaepon)
                             repeat
                                 wait()
                                 TweenFarm(CFrameQuest)
@@ -7274,7 +7275,7 @@ task.spawn(
                                                 repeat
                                                     task.wait()
                                                     _G.NotAutoEquip = false
-                                                    equip(_G.WeaponMelee)
+                                                    equipWeapon(_G.WeaponMelee)
                                                     AutoHaki()
                                                     PosMon = v.HumanoidRootPart.CFrame
                                                     OldPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -7353,7 +7354,7 @@ task.spawn(
                                                 repeat
                                                     task.wait()
                                                     AutoHaki()
-                                                    equip(_G.SelectWeaponHere)
+                                                    equipWeapon(_G.SelectWeaponHere)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.Head.CanCollide = false
@@ -7393,7 +7394,7 @@ task.spawn(
                                     "Detective"
                                 )
                                 wait(.5)
-                                equip("Key")
+                                equipWeapon("Key")
                                 TweenFarm(CFrame.new(1348.487060546875, 37.34933853149414, -1326.12158203125))
                             end
                         end
@@ -7403,7 +7404,7 @@ task.spawn(
         end
     end
 )
-function equip(typ)
+function equipWeapon(typ)
     for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if (v:IsA("Tool")) then
             if (v.ToolTip == typ or v.Name == typ) then
