@@ -1,3 +1,26 @@
+local keys = {
+    "CZ56-lfHU-zTuo",
+    "Qsnh-O26W-ZaHp"
+}
+
+local counter = 1
+local keyCheck
+for i,v in pairs(keys) do
+    if counter == #keys then
+        -- NOT WHITELIST
+        game.Players.LocalPlayer:Kick("keyผิด")
+        else
+        if v == _G.Key then
+            -- WHITELIST
+            print("SCRIPT : RUN")
+            keyCheck = _G.Key
+            key = ""
+            else
+            counter = counter +1
+        end
+    end
+end
+
 local PlaceId = game.PlaceId
 if PlaceId == 2753915549 then
 	shared.LoaderTitle = 'BLOX FRUIT WORLD 1' -- ใส่ชื่อฃ
