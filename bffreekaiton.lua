@@ -14,7 +14,7 @@ for i,v in pairs(keys) do
             -- WHITELIST
             print("SCRIPT : RUN")
             keyCheck = _G.Key
-            key = ""
+            key = "CZ56-lfHU-zTuo", "Qsnh-O26W-ZaHp"
             else
             counter = counter +1
         end
