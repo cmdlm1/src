@@ -1,4 +1,14 @@
-shared.LoaderTitle = 'lowzenDEX' -- ใส่ชื่อ
+local PlaceId = game.PlaceId
+if PlaceId == 2753915549 then
+	shared.LoaderTitle = 'BLOX FRUIT WORLD 1' -- ใส่ชื่อฃ
+elseif PlaceId == 4442272183 then
+	shared.LoaderTitle = 'BLOX FRUIT WORLD 2' -- ใส่ชื่อฃ
+elseif PlaceId == 7449423635 then
+	shared.LoaderTitle = 'BLOX FRUIT WORLD 3' -- ใส่ชื่อฃ
+else
+	game.Players.LocalPlayer:Kick("รันผิดเเมพไอ้โง่")
+end
+
 shared.LoaderKeyFrames = {
    [1] = {1, 30}, -- [Time (s), Percentage] 
    [2] = {3, 100} -- [เวลา, เปอร์เซ็น]
@@ -6,7 +16,7 @@ shared.LoaderKeyFrames = {
 
 local Metadata = {
 	LoaderData = {
-		Name = (shared.LoaderTitle or 'A Loader'),
+		Name = (shared.LoaderTitle or 'LOWZEN Loader'),
 		Colors = shared.LoaderColors or {
 			Main = Color3.fromRGB(24, 24, 24),
 			Topic = Color3.fromRGB(255, 45, 33),
@@ -8520,46 +8530,61 @@ function GetCurrentBlade()
     return ret
 end
 function AttackNoCD()
-    local AC = CbFw2.activeController
-    for i = 1, 1 do
-        local bladehit = getAllBladeHits(30)
-            require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-            plr.Character,
-            {plr.Character.HumanoidRootPart},
-            60
-        )
-        local cac = {}
-        local hash = {}
-        for k, v in pairs(bladehit) do
-            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
-                table.insert(cac, v.Parent.HumanoidRootPart)
-                hash[v.Parent] = true
-            end
-        end
-		local bladehit = getAllBladeHits(30)
-		if #bladehit > 0 then
-			local AcAttack8 = debug.getupvalue(ac.attack, 5)
-			local AcAttack9 = debug.getupvalue(ac.attack, 6)
-			local AcAttack7 = debug.getupvalue(ac.attack, 4)
-			local AcAttack10 = debug.getupvalue(ac.attack, 7)
-			local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
-			local NumberAc13 = AcAttack7 * 798405
-            pcall(function()
-                for k, v in pairs(AC.animator.anims.basic) do
-                    v:Play()
-                end                  
-            end
-		)
-            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
-				task.wait(xds)
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                rel.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
-            end
-        end
-    end
+	local AC = CombatFrameworkR.activeController
+	if AC and AC.equipped then
+		for indexincrement = 1, 1 do
+			local bladehit = getAllBladeHitsPlayers(60)
+			if #bladehit > 0 then
+				local AcAttack8 = debug.getupvalue(AC.attack, 5)
+				local AcAttack9 = debug.getupvalue(AC.attack, 6)
+				local AcAttack7 = debug.getupvalue(AC.attack, 4)
+				local AcAttack10 = debug.getupvalue(AC.attack, 7)
+				local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
+				local NumberAc13 = AcAttack7 * 798405
+				(function()
+					NumberAc12 = (NumberAc12 * AcAttack9 + NumberAc13) % 1099511627776
+					AcAttack8 = math.floor(NumberAc12 / AcAttack9)
+					AcAttack7 = NumberAc12 - AcAttack8 * AcAttack9
+				end)()
+				AcAttack10 = AcAttack10 + 1
+				debug.setupvalue(AC.attack, 5, AcAttack8)
+				debug.setupvalue(AC.attack, 6, AcAttack9)
+				debug.setupvalue(AC.attack, 4, AcAttack7)
+				debug.setupvalue(AC.attack, 7, AcAttack10)
+				for k, v in pairs(AC.animator.anims.basic) do
+					v:Play(0.01,0.01,0.01)
+				end                 
+				if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and ac.blades and ac.blades[1] then 
+					game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(CurrentWeapon()))
+					game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(NumberAc12 / 1099511627776 * 16777215), AcAttack10)
+					game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "") 
+				end
+			end
+		end
+	end
 end
-
+coroutine.wrap(function()
+	while task.wait(.1) do
+		local AC = CombatFrameworkR.activeController
+		if AC and AC.equipped then
+			if FastAttack and _G.Settings.Configs["Fast Attack"] then
+				AttackNoCD()
+				if _G.Settings.Configs["Fast Attack Type"] == "Normal" then
+					if tick() - cooldownfastattack > .9 then wait(.1) cooldownfastattack = tick() end
+				elseif _G.Settings.Configs["Fast Attack Type"] == "Fast" then
+					if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
+				elseif _G.Settings.Configs["Fast Attack Type"] == "Slow" then
+					if tick() - cooldownfastattack > .3 then wait(.7) cooldownfastattack = tick() end
+				end
+			elseif FastAttack and _G.Settings.Configs["Fast Attack"] == false then
+				if ac.hitboxMagnitude ~= 55 then
+					ac.hitboxMagnitude = 55
+				end
+				AC:attack()
+			end
+		end
+	end
+end)()
 require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 task.spawn(
     function()
@@ -8682,12 +8707,23 @@ task.spawn(
                             StartMagnet = false
                             QuestCheck()
 							equipWeapon(getgenv().Config._selectwaepon)
+							AttackNoCD()
+							game:GetService'VirtualUser':CaptureController()
+							game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             repeat
                                 wait()
+								equipWeapon(getgenv().Config._selectwaepon)
                                 TweenFarm(CFrameQuest)
+								AttackNoCD()
+								game:GetService'VirtualUser':CaptureController()
+								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until (CFrameQuest.Position -
                                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
                                 1200 or not getgenv().LevelFarm
+								equipWeapon(getgenv().Config._selectwaepon)
+								AttackNoCD()
+								game:GetService'VirtualUser':CaptureController()
+								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             if
                                 (CFrameQuest.Position -
                                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
@@ -8718,8 +8754,11 @@ task.spawn(
                                              then
                                                 repeat
                                                     task.wait()
-                                                    equipWeapon(_G.WeaponMelee)
+                                                    equipWeapon(getgenv().Config._selectwaepon)
                                                     AutoHaki()
+													AttackNoCD()
+													game:GetService'VirtualUser':CaptureController()
+													game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                     PosMon = v.HumanoidRootPart.CFrame
                                                     OldPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                                                     TweenFarm(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 15))
@@ -8736,7 +8775,10 @@ task.spawn(
                                                 until not getgenv().LevelFarm or v.Humanoid.Health <= 0 or not v.Parent or
                                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible ==
                                                         false
-														equipWeapon(_G.WeaponMelee)
+														equipWeapon(getgenv().Config._selectwaepon)
+														AttackNoCD()
+														game:GetService'VirtualUser':CaptureController()
+														game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             else
                                                 StartMagnet = false
                                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
@@ -10254,4 +10296,4 @@ task.spawn(function()
     end)
 end)
 
-return library, library_flags, library.subs
+return library, library_flags, library.subs----อย่าเอาออกไอสัส
