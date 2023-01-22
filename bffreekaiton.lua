@@ -8563,28 +8563,7 @@ function AttackNoCD()
 		end
 	end
 end
-coroutine.wrap(function()
-	while task.wait(.1) do
-		local AC = CombatFrameworkR.activeController
-		if AC and AC.equipped then
-			if FastAttack and _G.Settings.Configs["Fast Attack"] then
-				AttackNoCD()
-				if _G.Settings.Configs["Fast Attack Type"] == "Normal" then
-					if tick() - cooldownfastattack > .9 then wait(.1) cooldownfastattack = tick() end
-				elseif _G.Settings.Configs["Fast Attack Type"] == "Fast" then
-					if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
-				elseif _G.Settings.Configs["Fast Attack Type"] == "Slow" then
-					if tick() - cooldownfastattack > .3 then wait(.7) cooldownfastattack = tick() end
-				end
-			elseif FastAttack and _G.Settings.Configs["Fast Attack"] == false then
-				if ac.hitboxMagnitude ~= 55 then
-					ac.hitboxMagnitude = 55
-				end
-				AC:attack()
-			end
-		end
-	end
-end)()
+
 require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 task.spawn(
     function()
@@ -8707,23 +8686,12 @@ task.spawn(
                             StartMagnet = false
                             QuestCheck()
 							equipWeapon(getgenv().Config._selectwaepon)
-							AttackNoCD()
-							game:GetService'VirtualUser':CaptureController()
-							game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             repeat
                                 wait()
-								equipWeapon(getgenv().Config._selectwaepon)
                                 TweenFarm(CFrameQuest)
-								AttackNoCD()
-								game:GetService'VirtualUser':CaptureController()
-								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until (CFrameQuest.Position -
                                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
                                 1200 or not getgenv().LevelFarm
-								equipWeapon(getgenv().Config._selectwaepon)
-								AttackNoCD()
-								game:GetService'VirtualUser':CaptureController()
-								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             if
                                 (CFrameQuest.Position -
                                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
@@ -8754,11 +8722,9 @@ task.spawn(
                                              then
                                                 repeat
                                                     task.wait()
-                                                    equipWeapon(getgenv().Config._selectwaepon)
+                                                    _G.NotAutoEquip = false
+                                                    equipWeapon(_G.WeaponMelee)
                                                     AutoHaki()
-													AttackNoCD()
-													game:GetService'VirtualUser':CaptureController()
-													game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                     PosMon = v.HumanoidRootPart.CFrame
                                                     OldPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                                                     TweenFarm(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 15))
@@ -8775,10 +8741,6 @@ task.spawn(
                                                 until not getgenv().LevelFarm or v.Humanoid.Health <= 0 or not v.Parent or
                                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible ==
                                                         false
-														equipWeapon(getgenv().Config._selectwaepon)
-														AttackNoCD()
-														game:GetService'VirtualUser':CaptureController()
-														game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             else
                                                 StartMagnet = false
                                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
