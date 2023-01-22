@@ -8723,7 +8723,7 @@ task.spawn(
                                                 repeat
                                                     task.wait()
                                                     _G.NotAutoEquip = false
-                                                    equipWeapon(_G.WeaponMelee)
+                                                    equipWeapon(getgenv().Config._selectwaepon)
                                                     AutoHaki()
                                                     PosMon = v.HumanoidRootPart.CFrame
                                                     OldPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -8802,7 +8802,7 @@ task.spawn(
                                                 repeat
                                                     task.wait()
                                                     AutoHaki()
-                                                    equipWeapon(_G.SelectWeaponHere)
+                                                    equipWeapon(getgenv().Config._selectwaepon)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.Head.CanCollide = false
